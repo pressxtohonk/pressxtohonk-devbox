@@ -1,0 +1,10 @@
+# https://fly.io/docs/reference/configuration/
+
+app = 'pressxtohonk-devbox'
+primary_region = 'sin'
+
+[[vm]]
+  memory = "512mb"
+  size = 'shared-cpu-1x'
+  # memory = "2gb"
+  # size = 'performance-1x'
