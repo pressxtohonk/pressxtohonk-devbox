@@ -10,6 +10,7 @@ WORKDIR $HOME
 RUN nix profile add \
 	nixpkgs#bash \
 	nixpkgs#bat \
+	nixpkgs#direnv \
 	nixpkgs#fd \
 	nixpkgs#flyctl \
 	nixpkgs#fzf \
