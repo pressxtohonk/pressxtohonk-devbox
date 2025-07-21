@@ -25,5 +25,5 @@ ssh: ## SSH into the devbox
 	flyctl ssh console
 
 tmux: ## SSH into the devbox and start a tmux session
-	flyctl ssh console --pty -C tmux
+	flyctl ssh console --pty -C "bash -l -c tmux"
 
