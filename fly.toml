@@ -3,6 +3,11 @@
 app = 'pressxtohonk-devbox'
 primary_region = 'sin'
 
+[mounts]
+  source = "data"
+  destination = "/data"
+  initial_size = "1gb" # $0.15¢ / gb / month
+
 [[vm]]
   memory = "256mb"
   size = 'shared-cpu-1x'

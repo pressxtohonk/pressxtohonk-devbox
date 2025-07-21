@@ -9,6 +9,9 @@ help: ## Show this help
 login: ## Authorize with fly.io
 	flyctl auth login
 
+create-volume: ## Creates a persistent volume for mounting in fly.toml
+	flyctl volumes create data
+
 build: ## Build the devbox image without deploying
 	flyctl deploy --build-only
 
