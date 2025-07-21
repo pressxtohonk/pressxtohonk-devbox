@@ -9,6 +9,9 @@ help: ## Show this help
 login: ## Authorize with fly.io
 	flyctl auth login
 
+create-secrets: ## Imports secrets from .env into devbox env vars
+	cat .env | flyctl secrets import
+
 create-volume: ## Creates a persistent volume for mounting in fly.toml
 	flyctl volumes create data
 
