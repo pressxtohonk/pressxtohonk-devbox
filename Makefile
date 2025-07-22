@@ -1,35 +1,38 @@
-SHELL := bash
-
 .DEFAULT_GOAL := help
 
 help: ## Show this help
 	@awk 'BEGIN {FS = ":.*##"} /^[a-zA-Z0-9_-]+:.*##/ \
 	{ printf "\033[36m%-20s\033[0m %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
 
-login: ## Authorize with fly.io
+auth: ## Authenticate with fly.io
 	flyctl auth login
 
-create-secrets: ## Imports secrets from .env into devbox env vars
+init-app: ## First time setup, run this for new fly.io apps
+	flyctl volumes list --json | grep '"name": "data"' \
+		&& echo persistent volume already created \
+		|| flyctl volumes create data --region sin
 	cat .env | flyctl secrets import
 
-create-volume: ## Creates a persistent volume for mounting in fly.toml
-	flyctl volumes create data
-
-build: ## Build the devbox image without deploying
-	flyctl deploy --build-only
-
 deploy: ## Build and deploy the devbox image
-	flyctl deploy
+	flyctl deploy --image-label devbox
 
-start: ## Ensure a devbox instance is running
+scale-down: ## Scale to 1 CPU (shared), 256mb RAM
+	flyctl scale vm shared-cpu-1x
+
+scale-up: ## Scale to 1 CPU, 2gb RAM
+	flyctl scale vm performance-1x
+
+session: session-tmux ## Runs the default session (tmux)
+
+session-tmux: ## SSH into a tmux session and suspend the devbox when done
 	flyctl scale count 1
+	flyctl machine start $$(flyctl machine list --json | jq -r '.[0].id')
+	flyctl ssh console --pty -C "bash -l -c 'tmux new -A -s default'"
+	flyctl machine suspend $$(flyctl machine list --json | jq -r '.[0].id')
 
-stop: ## Ensure no devbox instances are running
-	flyctl scale count 0
-
-ssh: ## SSH into the devbox
+session-bash: ## SSH into a bash shell and suspend the devbox when done
+	flyctl scale count 1
+	flyctl machine start $$(flyctl machine list --json | jq -r '.[0].id')
 	flyctl ssh console
-
-tmux: ## SSH into the devbox and start a tmux session
-	flyctl ssh console --pty -C "bash -l -c tmux"
+	flyctl machine suspend $$(flyctl machine list --json | jq -r '.[0].id')
 
