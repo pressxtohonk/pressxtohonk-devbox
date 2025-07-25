@@ -20,6 +20,9 @@ Search & navigation:
 - rg
 - zoxide
 
+AI:
+- opencode
+
 ## Usage
 
 Run `make` or refer to the `Makefile` for intended usage.

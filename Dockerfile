@@ -22,6 +22,7 @@ RUN nix profile add \
 	nixpkgs#gnused \
 	nixpkgs#htop \
 	nixpkgs#neovim \
+	nixpkgs#opencode \
 	nixpkgs#ripgrep \
 	nixpkgs#starship \
 	nixpkgs#tmux \
