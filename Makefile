@@ -22,7 +22,7 @@ deploy: ## Build and deploy the devbox image
 devbox: ## Ephemeral devbox machine, destroyed on disconnect
 	flyctl machine run registry.fly.io/$$(flyctl status -j | jq -r '.Name'):devbox --shell --rm
 
-session: session-bash ## Runs the default session with persistent storage (tmux)
+session: session-bash ## Runs the default session with persistent storage (bash)
 
 session-tmux: ## SSH into a tmux session and suspend the devbox when done
 	flyctl scale count 1
