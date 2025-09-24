@@ -23,11 +23,14 @@ RUN nix profile add \
 	nixpkgs#htop \
 	nixpkgs#neovim \
 	nixpkgs#opencode \
+	nixpkgs#pyright \
 	nixpkgs#ripgrep \
+	nixpkgs#ruff \
 	nixpkgs#starship \
 	nixpkgs#tmux \
 	nixpkgs#tree \
 	nixpkgs#unzip \
+	nixpkgs#uv \
 	nixpkgs#zoxide
 
 COPY workspace/ .
