@@ -17,10 +17,10 @@ build: ## Build the devbox image
 	flyctl deploy --build-only --image-label devbox
 
 deploy: ## Build and deploy the devbox image
-	flyctl deploy --image registry.fly.io/$$(flyctl status -j | jq -r '.Name'):devbox
+	flyctl deploy
 
 devbox: ## Ephemeral devbox machine, destroyed on disconnect
-	flyctl machine run registry.fly.io/$$(flyctl status -j | jq -r '.Name'):devbox --shell --rm
+	flyctl machine run . --shell --rm
 
 session: session-bash ## Runs the default session with persistent storage (bash)
 
