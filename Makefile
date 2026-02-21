@@ -22,7 +22,10 @@ deploy: ## Build and deploy the devbox image
 devbox: ## Ephemeral devbox machine, destroyed on disconnect
 	flyctl machine run . --shell --rm
 
-session: session-bash ## Runs the default session with persistent storage (bash)
+session: session-rpi4 ## Runs the default session on a home server (tmux)
+
+session-rpi4: ## SSH into a tmux session on a home server via tailscale
+	ssh pressxtohonk@devbox -t 'tmux new -A -s dev'
 
 session-tmux: ## SSH into a tmux session and suspend the devbox when done
 	flyctl scale count 1
